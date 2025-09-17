@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rival</title>
+    <style>
+        :root {
+            --bg-color: #2e2e2e; --text-color: #f1f1f1; --border-color: #444;
+            --hover-color: #555; --accent-color: #64b5f6; --danger-color: #e57373;
+            --success-color: #81c784;
+        }
+        body.light-theme {
+            --bg-color: #f1f1f1; --text-color: #2e2e2e; --border-color: #ccc; --hover-color: #e0e0e0;
+        }
+        body.ocean-theme {
+            --bg-color: #0c1445; --text-color: #e0f7fa; --border-color: #223a70;
+            --hover-color: #1a235c; --accent-color: #80deea; --success-color: #a5d6a7;
+        }
+        body.forest-theme {
+            --bg-color: #2d3a3a; --text-color: #f1f8e9; --border-color: #435043;
+            --hover-color: #384538; --accent-color: #aed581; --success-color: #f4ff81;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 10px; font-size: 14px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 0 5px 10px 5px; border-bottom: 1px solid var(--border-color); }
+        .header h3 { margin: 0; }
+        .header-btn { cursor: pointer; font-size: 20px; background: none; border: none; color: var(--text-color); }
+        #back-btn { display: none; }
+        ul { list-style: none; padding: 0; margin: 0; max-height: 480px; overflow-y: auto;}
+        li { display: flex; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--border-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+        li:hover { background-color: var(--hover-color); }
+        .active-indicator { color: var(--success-color); font-size: 12px; margin-right: 8px; font-weight: bold; }
+        .number { font-weight: bold; color: var(--accent-color); margin-left: 4px; margin-right: 15px; }
+        .item-text { flex-grow: 1; overflow: hidden; text-overflow: ellipsis; }
+        .actions { display: flex; align-items: center; margin-left: auto; padding-left: 10px; }
+        .action-btn { cursor: pointer; margin-left: 10px; font-weight: bold; background: none; border: none; font-size: 16px; }
+        .edit-btn { color: var(--accent-color); }
+        .delete-btn { color: var(--danger-color); }
+        .add-group-li { color: var(--accent-color); font-style: italic; }
+        .add-group-input { flex-grow: 1; background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--accent-color); border-radius: 3px; padding: 4px; }
+        .confirm-btn { padding: 4px 8px; border-radius: 3px; cursor: pointer; border: none; }
+        .confirm-delete-btn { background-color: var(--danger-color); color: white; }
+        .cancel-btn { margin-left: 5px; background-color: var(--hover-color); color: var(--text-color); }
+        #settings-panel { display: none; padding: 15px; background-color: var(--border-color); }
+        .setting { margin-bottom: 15px; }
+        .setting-checkbox { display: flex; align-items: center; }
+        .setting-checkbox label { margin-left: 10px; }
+        .setting label { display: block; margin-bottom: 5px; }
+        .setting input, .setting select { width: 100%; padding: 5px; background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--hover-color); border-radius: 3px; box-sizing: border-box; }
+        #exit-key-input { text-align: center; cursor: pointer; font-weight: bold; }
+        .settings-buttons { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .btn { padding: 8px 15px; border: none; border-radius: 3px; cursor: pointer; }
+        #save-settings-btn { background-color: var(--accent-color); color: white; }
+        #reset-settings-btn { background-color: var(--danger-color); color: white; }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="header">
+        <button id="back-btn" class="header-btn">←</button>
+        <h3 id="title">Groups</h3>
+        <button id="settings-toggle-btn" class="header-btn">⚙️</button>
+    </div>
+    <div id="settings-panel">
+        <div class="setting setting-checkbox">
+            <input type="checkbox" id="startup-checkbox">
+            <label for="startup-checkbox">Launch on system startup</label>
+        </div>
+        <div class="setting">
+            <label for="theme-select">Theme</label>
+            <select id="theme-select">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+                <option value="ocean">Ocean</option>
+                <option value="forest">Forest</option>
+            </select>
+        </div>
+        <div class="setting">
+            <label for="exit-key-input">Hide Window Key</label>
+            <input type="text" id="exit-key-input" readonly>
+        </div>
+        <div class="settings-buttons">
+            <button id="save-settings-btn" class="btn">Save Settings</button>
+            <button id="reset-settings-btn" class="btn">Reset to Default</button>
+        </div>
+    </div>
+    <ul id="main-list"></ul>
+    <script src="./renderer.js"></script>
+</body>
+</html>
